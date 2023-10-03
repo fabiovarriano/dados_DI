@@ -1,16 +1,13 @@
+# Arquivo para importar dados da cotação DI-Futuro:
 # Bibliotecas:
 import pandas as pd
 import numpy as np
 import json,requests
 import json 
-#from datetime import datetime
-#import plotly.express as px
-#import plotly.graph_objects as go
+
 import datetime
 
 # API banco de dados 
-#startdi = datetime.now()
-#requisilção:
 url = requests.get('https://cotacao.b3.com.br/mds/api/v1/DerivativeQuotation/DI1')
 # ler conteúdo da resposta:
 text = url.text
@@ -39,7 +36,6 @@ df = df.rename(columns = { 'symb': 'simbolo',
                           'sellOffer.price': 'ultima_oferta_venda'
                           })
 difuturo = df.sort_values(by = 'vencimento')
-
 difuturo = difuturo.dropna()
 difuturo['vencimento'] = pd.to_datetime(difuturo['vencimento'], format = 'mixed')
 difuturo = difuturo.loc[difuturo['vencimento'] < '2028-08-01']

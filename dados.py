@@ -39,6 +39,8 @@ difuturo = df.sort_values(by = 'vencimento')
 difuturo = difuturo.dropna()
 difuturo['vencimento'] = pd.to_datetime(difuturo['vencimento'], format = 'mixed')
 difuturo = difuturo.loc[difuturo['vencimento'] < '2028-08-01']
+#criar linha com a data da consulta:
+difuturo['data_consulta'] = hoje = datetime.datetime.today()
 # criar código para nomear arquivo:
 hoje = datetime.datetime.today()
 hoje = hoje.strftime("%d-%m-%Y")
